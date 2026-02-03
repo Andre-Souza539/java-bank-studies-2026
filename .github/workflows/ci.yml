@@ -1,0 +1,36 @@
+name: CI - SpringBoot
+
+
+on:
+  push:
+    branches: ["development", "main", "master"]
+  pull_request:
+    branches: ["development", "main", "master"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Cache do Maven
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-m2-
+
+      - name: Dar permissão ao mvnw
+        run: chmod +x mvnw
+
+      - name: Build e testes
+        run: ./mvnw clean verify
