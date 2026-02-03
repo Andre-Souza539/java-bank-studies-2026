@@ -29,5 +29,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-m2-
 
+      - name: Dar permissão ao mvnw
+        run: chmod +x mvnw
+
       - name: Build e testes
         run: ./mvnw clean verify
