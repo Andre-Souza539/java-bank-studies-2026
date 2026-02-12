@@ -1,12 +1,17 @@
 package com.nerdlab.bank.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Table(name = "tb_users")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Users {
 
     @Id
@@ -22,42 +27,5 @@ public class Users {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-
-    public Users(
-            String firstName,
-            String lastName,
-            String email){
-        this.setFisrtName(firstName);
-        this.setLastName(lastName);
-        this.setEmail(email);
-    }
-
-    public Users(){
-
-    }
-
-    private void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getEmail(){
-        return this.email;
-    }
-
-    private void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getLastName(){
-        return  this.lastName;
-    }
-
-    private void setFisrtName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getFirstName(){
-        return this.firstName;
-    }
 
 }
