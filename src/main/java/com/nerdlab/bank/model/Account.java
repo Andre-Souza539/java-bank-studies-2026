@@ -16,14 +16,12 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Accounts {
+public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
     private UUID id;
-    @Column(name = "user_id")
-    private UUID userId;
     @Column(name = "bank_name")
     private String bankName;
     @Column(name = "account_number")
@@ -32,5 +30,9 @@ public class Accounts {
     private BigDecimal balance;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
 }
